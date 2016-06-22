@@ -1,3 +1,14 @@
+(global-set-key [f5] 'compile) 
+
+
+;;use existing compile frame
+(add-to-list
+ 'display-buffer-alist
+ '("\\*compilation\\*" display-buffer-reuse-window
+                         (reusable-frames . t)))
+
+
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-idle-delay 0)
@@ -50,10 +61,10 @@
   (when (and (= (following-char) ?\))
 	     (= (preceding-char) ? ))
     (backward-char)
-    (when (= (preceding-char) ?\()
-      (delete-char 1)
+    (if (= (preceding-char) ?\()
+	(delete-char 1)
+      (forward-char)
     )
-;;    (forward-char)
   )
 
   (forward-char)

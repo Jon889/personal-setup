@@ -14,3 +14,6 @@ Put screenshots in a directory, not the Desktop
 ## Services
 50% Alpha - makes an image 50% translucent, useful for pasting images on top of each other to compare them
 
+Open commit on github - select a commit hash, click this then it will open that commit on github (only works on one repo I use all the time)
+
+Switch branch - select a branch name, it checks it out in the last active terminal window

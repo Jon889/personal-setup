@@ -28,7 +28,7 @@ DEF_BKGD="\033[49m"
 DGY_BKGD="\033[100m"
 LGY_BKGD="\033[47m"
 
-titles=$(echo "$@" | awk '{for (i=1;i<=NF;i++) printf("%d %s\n", i-1, $i)}' )
+titles=$(echo "$@" | awk '{for (i=1;i<=NF;i++) printf("%d %s\n", i, $i)}' )
 
 # Print the menu for the first time and turn on mouse reporting
 
@@ -52,21 +52,35 @@ do
 					# Remove color control sequences
 					selected=$(echo "$title" | sed -E "s/[[:cntrl:]]\[[0-9]*m//g")
 				else
-					echo -ne "$DEL_LINE$LGY_BKGD$IDX $title$DEF_BKGD"
+					echo -ne "$DEL_LINE$LGY_BKGD$((IDX + 1)) $title$DEF_BKGD"
 				fi
 			else
-				echo -ne "$DEL_LINE$IDX $title"
+				echo -ne "$DEL_LINE$((IDX + 1)) $title"
 			fi
 			echo -ne "\n\033[2K\r"
 			(( IDX++ ))
 		done
 	else
-		echo $POS
+		case $POS in
+		[0-9]|[0-9][0-9])
+			branch=$(echo "${!POS}" | sed -E "s/[[:cntrl:]]\[[0-9]*m//g")
+			git checkout "$branch"
+			;;
+		d|dev)
+			git checkout develop
+			;;
+		-)
+			git checkout "$OLD_GBNAME"
+			;;
+		esac
+		exit
+		break
 	fi
 	if [[ ! -z "$selected" ]]; then
 		echo -e "\033[?1003l"
 		git checkout "$selected"
 		exit
+		break
 	fi
 	read -s -n 6 POS
 done

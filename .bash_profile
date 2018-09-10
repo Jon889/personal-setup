@@ -1,5 +1,4 @@
 export PS1="\W \u\$ "
-export TESCO_TPX=hii1
 
 alias glb='git -c color.ui=always branch --list | tr -d " *" | awk '\''{printf("%d %s\n", NR, $0)}'\'' 1>&2'
 alias gbn='git checkout -b'
@@ -90,7 +89,7 @@ parsejson() {
 }
 jatjson() {
 	PSWD=`security find-internet-password -ws "jira.global.tesco.org" -a "$TESCO_TPX"`
-	curl -s -u "$TESCO_TPX":"$PSWD" "https://jira.global.tesco.org/rest/api/latest/search?jql=project=ONA%20AND%20status=\"In%20Dev\"%20AND%20assignee=$TESCO_TPX&fields=summary,description"
+	curl -s -u "$TESCO_TPX":"$PSWD" "JIRA_URL/rest/api/latest/search?jql=project=ONA%20AND%20status=\"In%20Dev\"%20AND%20assignee=$TESCO_TPX&fields=summary,description"
 	echo ""
 }
 jat() {

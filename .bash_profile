@@ -9,7 +9,6 @@ alias gp='git push -u'
 alias gd='git diff'
 alias gl='git log'
 alias gc='git commit'
-alias gco='~/clickmenu.sh `git -c color.ui=always branch --list | tr -d " *"`'
 gbnum() {
 	BRANCH_NO=$1
 	if [ -z "$BRANCH_NO" ]
@@ -19,11 +18,14 @@ gbnum() {
 	fi
 	echo `git branch --list | tr -d " *" | sed -n "${BRANCH_NO}p"`
 }
-gco_old() {
-	CURR_BRANCH=`gbname`
+gco() {
+	PREV_BRANCH=`gbname`
 	re='^[0-9]+$'
 	case $1 in
-	''|[0-9]|[0-9][0-9])
+	'')
+		~/clickmenu.sh `git -c color.ui=always branch --list | tr -d " *"`
+		;;
+	[0-9]|[0-9][0-9])
 		git checkout "`gbnum $1`"
 		;;
 	d|dev)
@@ -40,7 +42,10 @@ gco_old() {
 		;;
 	esac
 	if [[ $? -eq 0 ]]; then
-		export OLD_GBNAME=$CURR_BRANCH
+		CURR_BRANCH=`gbname`
+		if [ "$CURR_BRANCH" != "$PREV_BRANCH" ]; then
+			export OLD_GBNAME=$PREV_BRANCH
+		fi
 	fi
 }
 
@@ -89,7 +94,7 @@ parsejson() {
 }
 jatjson() {
 	PSWD=`security find-internet-password -ws "jira.global.tesco.org" -a "$TESCO_TPX"`
-	curl -s -u "$TESCO_TPX":"$PSWD" "JIRA_URL/rest/api/latest/search?jql=project=ONA%20AND%20status=\"In%20Dev\"%20AND%20assignee=$TESCO_TPX&fields=summary,description"
+	curl -s -u "$TESCO_TPX":"$PSWD" "https://JIRA_URL/rest/api/latest/search?jql=project=ONA%20AND%20status=\"In%20Dev\"%20AND%20assignee=$TESCO_TPX&fields=summary,description"
 	echo ""
 }
 jat() {

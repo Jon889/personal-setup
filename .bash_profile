@@ -1,9 +1,16 @@
 export PS1="\W \u\$ "
+export TESCO_TPX=hii1
 
 alias glb='git -c color.ui=always branch --list | tr -d " *" | awk '\''{printf("%d %s\n", NR, $0)}'\'' 1>&2'
 alias gbn='git checkout -b'
 alias gs='git status'
 alias gbname='git symbolic-ref --short -q HEAD'
+alias gbdmerged='git branch --merged master | grep -v "^[ *]*master$" | xargs git branch -d'
+alias gp='git push -u'
+alias gd='git diff'
+alias gl='git log'
+alias gc='git commit'
+alias gco='~/clickmenu.sh `git -c color.ui=always branch --list | tr -d " *"`'
 gbnum() {
 	BRANCH_NO=$1
 	if [ -z "$BRANCH_NO" ]
@@ -13,7 +20,7 @@ gbnum() {
 	fi
 	echo `git branch --list | tr -d " *" | sed -n "${BRANCH_NO}p"`
 }
-gco() {
+gco_old() {
 	CURR_BRANCH=`gbname`
 	re='^[0-9]+$'
 	case $1 in
@@ -26,11 +33,16 @@ gco() {
 	-)
 		git checkout "$OLD_GBNAME"
 		;;
+	--)
+		git checkout -- "$2"
+		;;
 	*)
 		git checkout "$1"
 		;;
 	esac
-	export OLD_GBNAME=$CURR_BRANCH
+	if [[ $? -eq 0 ]]; then
+		export OLD_GBNAME=$CURR_BRANCH
+	fi
 }
 
 
@@ -106,3 +118,13 @@ jatbn() {
 		echo "Multiple In Dev issues not supported yet"
 	fi
 }
+
+# added by Miniconda3 installer
+export PATH="/Users/jonathan/miniconda3/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# added by Anaconda3 5.2.0 installer
+export PATH="/Users/jonathan/anaconda3/bin:$PATH"

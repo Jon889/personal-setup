@@ -14,6 +14,10 @@ Show xcode build times
 
     defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
     
+Show why build commands were run (helps debug long build times)
+
+    defaults write com.apple.dt.Xcode ExplainWhyBuildCommandsAreRun -bool YES
+    
 ## Services
 50% Alpha - makes an image 50% translucent, useful for pasting images on top of each other to compare them
 

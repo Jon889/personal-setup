@@ -10,6 +10,9 @@ Put screenshots in a directory, not the Desktop
 
     defaults write com.apple.screencapture location ~/Pictures/Screenshots
     
+Show xcode build times
+
+    defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
     
 ## Services
 50% Alpha - makes an image 50% translucent, useful for pasting images on top of each other to compare them

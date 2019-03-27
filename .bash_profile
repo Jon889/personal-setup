@@ -1,5 +1,7 @@
 export PS1="\W \u\$ "
 
+alias o=open
+alias s='open -a Sublime\ Text'
 alias glb='git -c color.ui=always branch --list | tr -d " *" | awk '\''{printf("%d %s\n", NR, $0)}'\'' 1>&2'
 alias gbn='git checkout -b'
 alias gs='git status'
@@ -9,6 +11,15 @@ alias gp='git push -u'
 alias gd='git diff'
 alias gl='git log'
 alias gc='git commit'
+alias osf='open SnapshotTestImages/FailureDiffs'
+alias rsf='rm -rf SnapshotTestImages/FailureDiffs'
+alias gud='TGBN="$OLD_GBNAME"; gco d && git pull; gco -; OLD_GBNAME="$TGBN"'
+
+alias tpswd='security find-internet-password -ws "secure.tesco.com" | pbcopy'
+alias xr='osascript -e "tell application \"Xcode\" to activate" -e "tell application \"Xcode\" to run active workspace document"'
+gpr() {
+	open "$(git config --get remote.origin.url | sed s_:_/_ | sed s_git@_http://_ | sed 's_\.git__')/compare/$(gbname)?expand=1&body=JIRA:%20https%3A%2F%2Fjira.global.tesco.org%2Fbrowse%2FONA-"
+}
 gbnum() {
 	BRANCH_NO=$1
 	if [ -z "$BRANCH_NO" ]
@@ -51,84 +62,20 @@ gco() {
 
 
 gbd() {
-	git branch -d `gbnum $1`
+	for var in "$@"; do
+		git branch -D `gbnum $var`
+	done
 }
 
 gstash() {
 	git stash save "$1"
 }
 
-gmr() {
-	UNMERGED=`git diff --name-only --diff-filter=U`
-	echo "Unmerged files:"
-
-	echo -e "\033[31m"
-	echo "$UNMERGED" | \
-	while read FILE; do
-		echo -e "\t$FILE"
-	done
-	echo -e "\033[0m"
-
-	echo "$UNMERGED" | \
-	while read FILE; do
-		echo "Opening $FILE"
-		open "$FILE"
-		read -p "Resolved? [y|n]" </dev/tty
-		if [ "$REPLY" != "" ]
-		then
-			git add "$FILE"
-		fi
-	done
+r2d() {
+	gco titan-release/v$1
+	git pull
+	gco d
+	git pull
+	gbn chore/jon-merge-release-$2
+	git merge titan-release/v$1
 }
-
-gbnt() {
-	gbn `jatbn`
-}
-
-gcot() {
-	gco `jatbn`
-}
-
-parsejson() {
-	python -c "import json,sys;print(json.load(sys.stdin)$1);"
-}
-jatjson() {
-	PSWD=`security find-internet-password -ws "jira.global.tesco.org" -a "$TESCO_TPX"`
-	curl -s -u "$TESCO_TPX":"$PSWD" "https://JIRA_URL/rest/api/latest/search?jql=project=ONA%20AND%20status=\"In%20Dev\"%20AND%20assignee=$TESCO_TPX&fields=summary,description"
-	echo ""
-}
-jat() {
-	RESP=`jatjson`
-#	echo -en "\033[32m"
-	echo $RESP | parsejson "['issues'][0]['key']"
-	echo $RESP | parsejson "['issues'][0]['fields']['summary']"
-#	echo -en "\033[0m"
-	echo $RESP | parsejson "['issues'][0]['fields']['description']"
-}
-
-jatbn() {
-	RESP=`jatjson`
-	NUM_ISSUES=`echo $RESP | parsejson "['issues'].__len__()"`
-	if [[ $NUM_ISSUES -eq 1 ]]; then
-		KEY=`echo $RESP | parsejson "['issues'][0]['key']" | sed s/ONA-//`
-		SUMMARY=`echo $RESP | parsejson "['issues'][0]['fields']['summary']" | tr '[:upper:]' '[:lower:]' | sed s/^\\\[ios\\\]\ *-*\ *//g | tr " " "-" | sed 's/-\{2,\}/-/g'`
-		read -p "Summary: [$SUMMARY]" </dev/tty
-		if [ "$REPLY" != "" ]
-		then
-			SUMMARY="$REPLY"
-		fi
-		echo feature/jon-$KEY-$SUMMARY
-	else
-		echo "Multiple In Dev issues not supported yet"
-	fi
-}
-
-# added by Miniconda3 installer
-export PATH="/Users/jonathan/miniconda3/bin:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# added by Anaconda3 5.2.0 installer
-export PATH="/Users/jonathan/anaconda3/bin:$PATH"

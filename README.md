@@ -1,22 +1,32 @@
 # Personal setup
 
-Things I have configured on my Mac that make it easier to do things.
+Things I have configured on my Mac that make it easier to do things:
+
+Set the display to maximum resolution
+
+Switch to bash.
+
+Disable all the useless services (like convert to Chinese, open man page)
 
 Show services directly in context menu instead of Services submenu:
 
     defaults write -g NSServicesMinimumItemCountForContextSubmenu -int 999
     
-Put screenshots in a directory, not the Desktop
+Disable the floating screenshot thumbnail (Cmd+Shift+5 > Options), put `~/Pictures/Screenshots` as a stack+fan in the dock, sorted by Date Added.
+    
+Put screenshots in a directory, not the Desktop (or in Cmd+Shift+5 > Options)
 
     defaults write com.apple.screencapture location ~/Pictures/Screenshots
+    
+Create ~/Stack folder and put it as a stack+fan in the dock sorted by Date Added (used for moving files between apps, eg for uploading, or just keeping track of files that relevant roughly now)
+
+Add the following folders to the Finder sidebar: ~, DerivedData, Screenshots, Stack.
     
 Show xcode build times
 
     defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
     
-Show why build commands were run (helps debug long build times)
-
-    defaults write com.apple.dt.Xcode ExplainWhyBuildCommandsAreRun -bool YES
+Set TextEdit to create plain text files
     
 ## Services
 50% Alpha - makes an image 50% translucent, useful for pasting images on top of each other to compare them

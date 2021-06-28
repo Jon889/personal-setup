@@ -6,6 +6,8 @@ Set the display to maximum resolution
 
 Switch to bash.
 
+Set trackpad gestures to 4 fingers, and enable 3 finger drag (System Preferences > Accessiblity > Pointer Control > Trackpad Options)
+
 Disable all the useless services (like convert to Chinese, open man page)
 
 Show services directly in context menu instead of Services submenu:

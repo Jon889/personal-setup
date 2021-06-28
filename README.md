@@ -14,6 +14,8 @@ Disable automatic graphics switching so that text doesn't look awful from using 
 
 Disable all the useless services (like convert to Chinese, open man page)
 
+Mission Control > Group windows by app
+
 Show services directly in context menu instead of Services submenu:
 
     defaults write -g NSServicesMinimumItemCountForContextSubmenu -int 999

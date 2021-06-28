@@ -8,6 +8,8 @@ Switch to bash.
 
 Set trackpad gestures to 4 fingers, and enable 3 finger drag (System Preferences > Accessiblity > Pointer Control > Trackpad Options)
 
+Disable automatic graphics switching so that text doesn't look awful from using integrated graphics card.
+
 Disable all the useless services (like convert to Chinese, open man page)
 
 Show services directly in context menu instead of Services submenu:

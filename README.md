@@ -16,6 +16,10 @@ Disable all the useless services (like convert to Chinese, open man page)
 
 Mission Control > Group windows by app
 
+Set the following so that gp alias works
+
+    git config --global push.default current
+
 Remove the delay for the proxy icon appearing in titlebars (the little folder or file icon you can drag/right click):
 
     defaults write -g NSToolbarTitleViewRolloverDelay -float 0

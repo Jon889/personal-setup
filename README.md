@@ -38,7 +38,7 @@ Create ~/Stack folder and put it as a stack+fan in the dock sorted by Date Added
 
 Add the following folders to the Finder sidebar: ~, DerivedData, Screenshots, Stack.
     
-Show xcode build times
+Show xcode build times (**NOTE THIS CAN CAUSE ISSUES WITH SPM** https://github.com/airbnb/lottie-ios/issues/1379)
 
     defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
     

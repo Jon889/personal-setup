@@ -10,7 +10,7 @@ Install brew
 
 Set trackpad gestures to 4 fingers, and enable 3 finger drag (System Preferences > Accessiblity > Pointer Control > Trackpad Options)
 
-Disable automatic graphics switching so that text doesn't look awful from using integrated graphics card.
+Disable automatic graphics switching so that text doesn't look awful from using integrated graphics card. (not needed on M1)
 
 Disable all the useless services (like convert to Chinese, open man page)
 

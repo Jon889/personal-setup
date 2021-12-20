@@ -20,9 +20,7 @@ Set the following so that gp alias works
 
     git config --global push.default current
 
-Remove the delay for the proxy icon appearing in titlebars (the little folder or file icon you can drag/right click):
-
-    defaults write -g NSToolbarTitleViewRolloverDelay -float 0
+Renable the proxy icon, (the icon in the titlebars of windows): System Preferences > Accessiblity > Display > Show window title icons
 
 Show services directly in context menu instead of Services submenu:
 
@@ -32,7 +30,7 @@ Disable the floating screenshot thumbnail (Cmd+Shift+5 > Options), put `~/Pictur
     
 Put screenshots in a directory, not the Desktop (or in Cmd+Shift+5 > Options)
 
-    defaults write com.apple.screencapture location ~/Pictures/Screenshots
+defaults write com.apple.screencapture location ~/Pictures/Screenshots
     
 Create ~/Stack folder and put it as a stack+fan in the dock sorted by Date Added (used for moving files between apps, eg for uploading, or just keeping track of files that relevant roughly now)
 

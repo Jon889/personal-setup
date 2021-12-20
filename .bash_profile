@@ -13,9 +13,8 @@ alias gl='git log'
 alias gc='git commit'
 alias osf='open SnapshotTestImages/FailureDiffs'
 alias rsf='rm -rf SnapshotTestImages/FailureDiffs'
-alias gud='TGBN="$OLD_GBNAME"; gco d && git pull; gco -; OLD_GBNAME="$TGBN"'
+alias gud='gco d && git pull; gco -'
 
-alias tpswd='security find-internet-password -ws "secure.tesco.com" | pbcopy'
 alias xr='osascript -e "tell application \"Xcode\" to activate" -e "tell application \"Xcode\" to run active workspace document"'
 gpr() {
 	open "$(git config --get remote.origin.url | sed s_:_/_ | sed s_git@_http://_ | sed 's_\.git__')/compare/$(gbname)?expand=1&body=JIRA:%20https%3A%2F%2Fjira.global.tesco.org%2Fbrowse%2FONA-"
@@ -69,13 +68,4 @@ gbd() {
 
 gstash() {
 	git stash save "$1"
-}
-
-r2d() {
-	gco titan-release/v$1
-	git pull
-	gco d
-	git pull
-	gbn chore/jon-merge-release-$2
-	git merge titan-release/v$1
 }

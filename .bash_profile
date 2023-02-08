@@ -8,11 +8,17 @@ alias gp='git push -u'
 alias gd='git diff'
 alias gl='git log'
 alias gc='git commit'
-alias gco='git checkout'
 alias gbd='git branch -D'
 alias gsu='git submodule update --remote'
 alias gbname='git symbolic-ref --short -q HEAD'
 gpr() {
 	gp && open "$(git config --get remote.origin.url | sed s_git@_http://_ | sed 's_\.git__')/compare/$(gbname)?expand=1"
+}
+gco() {
+	if [ $1 -ge 0 ]; then
+		git checkout $(git -c color.ui=always branch --list --sort=committerdate | tr -d " *" | awk "NR == $1")
+	else
+		git checkout "$@"
+	fi
 }
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jre/Contents/Home/"

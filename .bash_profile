@@ -15,8 +15,8 @@ gpr() {
 	gp && open "$(git config --get remote.origin.url | sed s_git@_http://_ | sed 's_\.git__')/compare/$(gbname)?expand=1"
 }
 gco() {
-	if [ $1 -ge 0 ]; then
-		git checkout $(git -c color.ui=always branch --list --sort=committerdate | tr -d " *" | awk "NR == $1")
+	if [[ $1 =~ ^[0-9]+$ ]] ; then
+		git checkout $(git --list --sort=committerdate | tr -d " *" | awk "NR == $1")
 	else
 		git checkout "$@"
 	fi

@@ -16,7 +16,7 @@ gpr() {
 }
 gco() {
 	if [[ $1 =~ ^[0-9]+$ ]] ; then
-		git checkout $(git --list --sort=committerdate | tr -d " *" | awk "NR == $1")
+		git checkout $(git branch --list --sort=committerdate | tr -d " *" | awk "NR == $1")
 	else
 		git checkout "$@"
 	fi

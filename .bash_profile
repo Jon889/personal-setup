@@ -1,4 +1,5 @@
 export PS1="\W \u\$ "
+export BASH_SILENCE_DEPRECATION_WARNING=1
 alias o=open
 alias s='open -a Sublime\ Text'
 alias glb='git -c color.ui=always branch --list --sort=committerdate | tr -d " *" | awk '\''{printf("%d %s\n", NR, $0)}'\'' 1>&2'

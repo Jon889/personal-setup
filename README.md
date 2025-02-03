@@ -48,3 +48,10 @@ Set TextEdit to create plain text files
 Open commit on github - select a commit hash, click this then it will open that commit on github (only works on one repo I use all the time)
 
 Switch branch - select a branch name, it checks it out in the last active terminal window
+
+## Xcode
+
+Shortcuts:
+* Canvas > Refresh Canvas to Cmd+P (remove from Print)
+* Use Selection for Find to Ctrl+Cmd+F (remove from Enter Full Screen)
+

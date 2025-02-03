@@ -53,5 +53,5 @@ Switch branch - select a branch name, it checks it out in the last active termin
 
 Shortcuts:
 * Canvas > Refresh Canvas to Cmd+P (remove from Print)
-* Use Selection for Find to Ctrl+Cmd+F (remove from Enter Full Screen)
+* Find Selected Text in Workspace to Ctrl+Cmd+F (remove from Enter Full Screen)
 

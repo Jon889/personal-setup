@@ -21,7 +21,7 @@ gs() {
 }
 
 gpr() {
-	gp && open "$(git config --get remote.origin.url | sed s_git@_http://_ | sed 's_\.git__' | sed 's_com:_com/_')/compare/$(gbname)?expand=1"
+	gp && open "$(git config --get remote.origin.url | sed s_git@_http://_ | sed 's_\.git__' | sed 's_com:_com/_' | sed 's_org:_org/_')/compare/$(gbname)?expand=1"
 }
 gco() {
 	if [[ $1 =~ ^[0-9]+$ ]] ; then
